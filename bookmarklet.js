@@ -9,9 +9,9 @@
         throw new TypeError('テキストエリアが見つかりませんでした。');
     }
 
-    textarea.value = translate(textarea); // 関数 translate を外に出して利用できます
+    textarea.innerText = translate(textarea.innerText); // 関数 translate を外に出して利用できます
     textarea.dispatchEvent(new Event('change'));
-})(document.querySelector('#descriptionTextArea').innerText, (val) => {
+})(document.querySelector('#descriptionTextArea'), (val) => {
     'use strict';
 
     const codes = [];
