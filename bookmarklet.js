@@ -302,22 +302,16 @@
 
         // 正規表現を助けるための改行を追加
         val = '\n' + val + '\n\n';
-        console.log("正規表現を助けるための改行を追加")
-        console.log(val)
 
         // 目次
         val = val.replace(/^#contents$/gm, '[toc]\n');
 
-        console.log("目次")
-        console.log(val)
         // コード範囲指定を隠す
         val = val.replace(/\n{code}([\s|\S]*?){\/code}\n/g, (m, p1) => {
             codes.push(p1);
 
             return `\n{{CODE_REPACE_BACKLOG_TO_MARKDOWN-${codes.length - 1}}}\n`;
         });
-        console.log("コード範囲指定を隠す")
-        console.log(val)
         // 引用範囲指定を隠す
         val = val.replace(/\n{quote}([\s|\S]*?){\/quote}\n/g, (m, p1) => {
             quotes.push(p1);
@@ -326,8 +320,6 @@
             return `\n{{QUOTE_REPACE_BACKLOG_TO_MARKDOWN-${quotes.length - 1}}}\n`;
         });
 
-        console.log("引用範囲指定を隠す")
-        console.log(val)
         // 通常テキスト（パラグラフ）を隠す
         val = val.replace(/^.*$/gm, (() => {
             const isP = /^(?![*\|\-\+\s>)`])(.*)$/;
@@ -348,30 +340,22 @@
             };
         })());
 
-        console.log("通常テキスト（パラグラフ）を隠す")
-        console.log(val)
         // パラグラフの塊は最後に空行を開けさせる
         val = val.replace(/\n{{PARAGRAPHS_REPACE_BACKLOG_TO_MARKDOWN-.*?}}\n(?!{{)/g, (p1) => {
             return `${p1}\n`;
         });
 
-        console.log("パラグラフの塊は最後に空行を開けさせる")
-        console.log(val)
 
         // 範囲指定型以外のBacklog記法を置き換える
         patterns.forEach(({ pattern, replacement }) => {
             val = val.replace(pattern, replacement);
         });
 
-        console.log("範囲指定型以外のBacklog記法を置き換える")
-        console.log(val)
         // 範囲指定系を埋めもどす前に無駄な改行を削除する
         while (/\n\n\n/g.test(val)) {
             val = val.replace('\n\n\n', '\n\n');
         }
 
-        console.log("範囲指定系を埋めもどす前に無駄な改行を削除する")
-        console.log(val)
         // コード範囲指定を戻す
         val = val.replace(/{{CODE_REPACE_BACKLOG_TO_MARKDOWN-(.*?)}}/g, (m, p1) => {
             let content = codes[Number(p1)].trim();
@@ -383,8 +367,6 @@
             return '\n```\n```\n';
         });
 
-        console.log("コード範囲指定を戻す")
-        console.log(val)
 
         // 引用範囲指定を戻す
         val = val.replace(/{{QUOTE_REPACE_BACKLOG_TO_MARKDOWN-(.*?)}}/g, (m, p1) => {
@@ -394,10 +376,8 @@
 
             return '\n> ' + content + '\n';
         });
-        console.log("引用範囲指定を戻す")
 
 
-        console.log(val)
         // パラグラフを戻す
         val = val.replace(/{{PARAGRAPHS_REPACE_BACKLOG_TO_MARKDOWN-(.*?)}}/g, (m, p1) => {
             let content = paragraphs[Number(p1)].trim();
@@ -406,12 +386,6 @@
 
             return content;
         });
-        console.log("パラグラフを戻す")
-
-        console.log(val)
-
-        console.log("末尾をHTMLの改行コードにする")
         val = val.replace('/$/g', '<br>')
-        console.log(val)
     return val.trim();
 });
