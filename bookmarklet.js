@@ -9,7 +9,7 @@
         throw new TypeError('テキストエリアが見つかりませんでした。');
     }
 
-    textarea.value = translate(textarea.value); // 関数 translate を外に出して利用できます
+    textarea.value = translate(textarea.val); // 関数 translate を外に出して利用できます
     textarea.dispatchEvent(new Event('change'));
 })(document.querySelector('#descriptionTextArea').innerText, (val) => {
     'use strict';
