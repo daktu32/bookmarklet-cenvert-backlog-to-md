@@ -107,15 +107,15 @@
             return content;
         };
         const patterns = [
-            // // 改行コード
-            // {
-            //     pattern: /\n\r/g,
-            //     replacement: '\n'
-            // },
-            // {
-            //     pattern: /\r/g,
-            //     replacement: '\n'
-            // },
+            // 改行コード
+             {
+                 pattern: /\n\r/g,
+                 replacement: '\n'
+             },
+             {
+                 pattern: /\r/g,
+                 replacement: '\n'
+             },
 
             // 見出し
             {
