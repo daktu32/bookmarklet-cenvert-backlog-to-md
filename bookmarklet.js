@@ -387,5 +387,6 @@
             return content;
         });
         val = val.replace('/$/g', '<br>')
+    console.log(val);
     return val.trim();
 });
