@@ -11,7 +11,7 @@
 
     textarea.value = translate(textarea.value); // 関数 translate を外に出して利用できます
     textarea.dispatchEvent(new Event('change'));
-})(document.querySelector('#descriptionTextArea'), (val) => {
+})(document.querySelector('#descriptionTextArea').innerText, (val) => {
     'use strict';
 
     const codes = [];
